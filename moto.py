@@ -3,3 +3,5 @@ class Moto:
         self.marca = marca
         self.modello = modello
         self.cilindrata = cilindrata
+
+    
