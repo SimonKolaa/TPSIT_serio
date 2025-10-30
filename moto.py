@@ -4,4 +4,4 @@ class Moto:
         self.modello = modello
         self.cilindrata = cilindrata
 
-ops    
+    
