@@ -7,18 +7,42 @@
 #4. codice ben indentato, commentato e modulare (ovvero un file dedicato per ogni parte logica del programma). 
 
 import re
-class EspressioneRegolare:
-    def __init__(self, tipo: str):
-        #Costruttore che inizializza l'espressione regolare
-        self.tipo = tipo
 
-    def set_tipo(self, tipo: str):
-        #Metodo per impostare una nuova espressione regolare
-        self.tipo = tipo
+class Pattern:
+    def __init__(self, regex: str):
+        #Costruttore che inizializza il pattern compilato
+        self.pattern = re.compile(regex)
 
-    def valida(self, string: str) -> str: ##type hinting
-        #Metodo che verifica se la stringa corrisponde all'espressione regolare
-        if re.fullmatch(self.tipo, string):
+    def set_regex(self, regex: str):
+        #Metodo per impostare una nuova espressione regolare e ricompilarla
+        self.pattern = re.compile(regex)
+
+    def match_valida(self, string: str) -> str:
+        #Metodo che verifica se la stringa inizia con il pattern (usando match)
+        if self.pattern.match(string):
+            return "match"
+        else:
+            return "mismatch"
+
+    def fullmatch_valida(self, string: str) -> str: #type hinting
+        #Metodo che verifica se la stringa corrisponde esattamente al pattern (usando fullmatch)
+        if self.pattern.fullmatch(string):
+            return "match"
+        else:
+            return "mismatch"
+
+    def valida_intero(self, string: str) -> str: #type hinting
+        # Valida un intero con segno opzionale
+        int_pattern = re.compile(r'[-+]?\d+') #preso da libreria
+        if int_pattern.fullmatch(string):
+            return "match"
+        else:
+            return "mismatch"
+
+    def valida_float(self, string: str) -> str: #type hinting
+        # Valida un numero float
+        float_pattern = re.compile(r'[-+]?(\d+(\.\d*)?|\.\d+)([eE][-+]?\d+)?') ##preso da libreria
+        if float_pattern.fullmatch(string):
             return "match"
         else:
             return "mismatch"

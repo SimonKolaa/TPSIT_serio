@@ -1,36 +1,68 @@
-#Import della classe EspressioneRegolare dal modulo Kola_espreg
-from Kola_espreg import EspressioneRegolare
+#Import della classe Pattern dal modulo Kola_espreg
+from Kola_espreg import Pattern
 
 def main():
     #Creazione di un'istanza della classe con un'espressione regolare per numeri interi
-    regex_validatore = EspressioneRegolare(r'\d+')
+    regex_valida = Pattern(r'\d+')
 
-    #Test di validazione con una stringa che corrisponde
+    #Test di validazione con match (inizia con il pattern)
     test_string1 = "123"
-    risultato1 = regex_validatore.valida(test_string1)
-    print(f"Test '{test_string1}': {risultato1}")
+    result1 = regex_valida.match_valida(test_string1)
+    print(f"Test match '{test_string1}': {result1}")
 
-#Test di validazione con una stringa che non corrisponde
-    test_string2 = "abc"
-    risultato2 = regex_validatore.valida(test_string2)
-    print(f"Test '{test_string2}': {risultato2}")
+    test_string2 = "123abc"
+    result2 = regex_valida.match_valida(test_string2)
+    print(f"Test match '{test_string2}': {result2}")
+
+    #Test di validazione con fullmatch (corrisponde esattamente)
+    result3 = regex_valida.fullmatch_valida(test_string1)
+    print(f"Test fullmatch '{test_string1}': {result3}")
+
+    result4 = regex_valida.fullmatch_valida(test_string2)
+    print(f"Test fullmatch '{test_string2}': {result4}")
 
 
-#Cambiamento dell'espressione regolare utilizzando il metodo set_tipo
-    regex_validatore.set_tipo(r'[a-zA-Z]+')
-
-
-#Test con la nuova espressione regolare
+    #Test con la nuova espressione regolare
     test_string3 = "Hello"
-    risultato3 = regex_validatore.valida(test_string3)
-    print(f"Test '{test_string3}' con nuova regex: {risultato3}")
+    result5 = regex_valida.match_valida(test_string3)
+    print(f"Test match '{test_string3}' con nuova regex: {result5}")
+
+    result6 = regex_valida.fullmatch_valida(test_string3)
+    print(f"Test fullmatch '{test_string3}' con nuova regex: {result6}")
+
+    test_string4 = "Hello123"
+    result7 = regex_valida.match_valida(test_string4)
+    print(f"Test match '{test_string4}' con nuova regex: {result7}")
+
+    result8 = regex_valida.fullmatch_valida(test_string4)
+    print(f"Test fullmatch '{test_string4}' con nuova regex: {result8}")
 
 
-    test_string4 = "123"
-    risultato4 = regex_validatore.valida(test_string4)
-    print(f"Test '{test_string4}' con nuova regex: {risultato4}")
+    # Validazione intero
+    int_test1 = "123"
+    result_int1 = regex_valida.valida_intero(int_test1)
+    print(f"Intero '{int_test1}': {result_int1}")
 
+    int_test2 = "-456"
+    result_int2 = regex_valida.valida_intero(int_test2)
+    print(f"Intero '{int_test2}': {result_int2}")
 
+    int_test3 = "abc"
+    result_int3 = regex_valida.valida_intero(int_test3)
+    print(f"Intero '{int_test3}': {result_int3}")
+
+    # Validazione float
+    float_test1 = "24.1632"
+    result_float1 = regex_valida.valida_float(float_test1)
+    print(f"Float '{float_test1}': {result_float1}")
+
+    float_test2 = "-1.23e10"
+    result_float2 = regex_valida.valida_float(float_test2)
+    print(f"Float '{float_test2}': {result_float2}")
+
+    float_test3 = "miao"
+    result_float3 = regex_valida.valida_float(float_test3)
+    print(f"Float '{float_test3}': {result_float3}")
 
 if __name__ == "__main__":
     main()
