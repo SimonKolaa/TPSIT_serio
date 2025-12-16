@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rubrica>
+    <alunno>
+        <nome>Dario Casali</nome>
+        <voto_pratico>6.5</voto_pratico>
+        <voto_teorico>4</voto_teorico>
+        <media>5.25</media>
+        <insufficiente>true</insufficiente>
+        <commento>Buona prova complessiva, ma lo studente ha cambiato scuola e non insegna più sistemi e reti.</commento>
+    </alunno>
+    <alunno>
+        <nome>Federico Di Luca</nome>
+        <voto_pratico>8</voto_pratico>
+        <voto_teorico>7.5</voto_teorico>
+        <media>7.75</media>
+        <insufficiente>false</insufficiente>
+        <commento>Ottima prova, lo studente ha dimostrato una buona conoscenza sia pratica che teorica.</commento>
+    </alunno>
+</rubrica>
