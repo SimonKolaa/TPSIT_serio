@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rubrica xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="rubrica.xsd">
+    <persona>
+        <nome>Mario</nome>
+        <cognome>Rossi</cognome>
+        <indirizzo>Via Roma 1, Milano</indirizzo>
+        <telefono>+39 02 1234567</telefono>
+        <telefono>+39 333 9876543</telefono>
+        <email>mario.rossi@example.com</email>
+        <email>mario.work@example.com</email>
+        <sitoWeb>http://www.mariorossi.it</sitoWeb>
+    </persona>
+    <persona>
+        <nome>Luca</nome>
+        <cognome>Verde</cognome>
+        <indirizzo>Piazza Garibaldi 5, Roma</indirizzo>
+        <telefono>+39 06 7654321</telefono>
+        <email>luca.verde@example.com</email>
+    </persona>
+</rubrica>
