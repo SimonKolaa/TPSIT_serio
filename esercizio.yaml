@@ -1,0 +1,25 @@
+Realizzare in YAML una rubrica dove si legga:
+il nome dell'alunno/a, 
+il voto pratico, 
+quello teorico, 
+se insufficiente calcolando la media e scrivendo sì/no
+un commento sulla prova sostenuta.
+traducilo in xml e xsd
+
+alunno1:
+  nome: "Dario Casali"
+  voto_pratico: !!float 6.5
+  voto_teorico: !!float 4
+  media: !!float 5.25
+  insufficiente: !!bool "true"
+  commento: "La prova teorica è risultata insufficiente, è un fisico non un sistemista."
+
+alunno2:
+  nome: "Federico Di Luca"
+  voto_pratico: !!float 8
+  voto_teorico: !!float 7.5
+  media: !!float 7.75
+  insufficiente: !!bool "false"
+  commento: "Ottima prova, lo studente ha dimostrato di poter insegnare sistemi e reti."
+
+
