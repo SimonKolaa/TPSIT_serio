@@ -1,0 +1,16 @@
+{
+  "books": [
+    {
+      "libro": "I Promessi Sposi",
+      "autore": "Alessandro Manzoni",
+      "casa_editrice": "Mondadori",
+      "genere": "narrativa"
+    },
+    {
+      "libro": "La Divina Commedia",
+      "autore": "Dante Alighieri",
+      "casa_editrice": "Einaudi",
+      "genere": "narrativa"
+    }
+  ]
+}

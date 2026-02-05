@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Inserisci Libro</title>
+		<style>
+			input, select {
+				display: block;
+				margin: 10px 0 20px 0;
+				width: 200px;
+				height: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Biblioteca</h1>
+
+		<form class="form" id="form1" onsubmit="salva_dati(); return false;">
+			<input name="nome" type="text" placeholder="inserisci qui il tuo nome"/>
+			<input name="cognome" type="text" placeholder="inserisci qui il tuo cognome"/>
+			<input name="titolo_libro" type="text" placeholder="inserisci qui il titolo del libro"/>
+			<input name="autore_libro" type="text" placeholder="inserisci qui l'autore del libro"/>
+			<input name="casa_editrice_libro" type="text" placeholder="inserisci qui la casa editrice"/>
+			<select name="genere">
+				<option value="narrativa">narrativa</option>
+				<option value="fantasy">libro di fantasy</option>
+				<option value="giallo">giallo</option>
+			</select>
+			<input type="submit" value="INVIA"/>
+		</form>
+
+		<br>
+		<a href="visualizza_biblioteca.html">Visualizza Biblioteca</a>
+		<br><br>
+		<button id="downloadBtn">Scarica biblioteca.json</button>
+
+	<script>
+		// Carica il file JSON iniziale se esiste
+		function carica_biblioteca_iniziale() {
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+					localStorage.setItem("biblioteca", xhr.responseText);
+					console.log("Biblioteca iniziale caricata");
+				}
+			};
+			xhr.open("GET", "biblioteca.json", true);
+			xhr.send();
+		}
+		carica_biblioteca_iniziale();
+
+		function salva_dati() {
+			console.log("Funzione salva_dati chiamata");
+			var form = document.getElementById("form1");
+			var data = new FormData(form);
+
+			var titolo = data.get("titolo_libro").trim();
+			var autore = data.get("autore_libro").trim();
+			var casa_editrice = data.get("casa_editrice_libro").trim();
+			var genere = data.get("genere");
+
+			console.log("Dati ricevuti:", {titolo, autore, casa_editrice, genere});
+
+			// Validazione
+			if (!titolo || !autore || !casa_editrice) {
+				alert("Compila tutti i campi obbligatori!");
+				return false;
+			}
+
+			// Leggo il JSON salvato in locale, se esiste
+			var stringa_salvata = localStorage.getItem("biblioteca");
+			console.log("JSON dal localStorage:", stringa_salvata);
+			
+			var json;
+
+			if (stringa_salvata) {
+				json = JSON.parse(stringa_salvata);
+			} else {
+				json = {"books": []};
+			}
+
+			// Creo l'oggetto libro
+			var book = {
+				"libro": titolo,
+				"autore": autore,
+				"casa_editrice": casa_editrice,
+				"genere": genere
+			};
+
+			// Aggiungo il libro all'array books
+			json.books.push(book);
+
+			// Salvo la stringa JSON in locale
+			var stringa_json = JSON.stringify(json, null, 2);
+			localStorage.setItem("biblioteca", stringa_json);
+
+			console.log("Libro aggiunto. JSON aggiornato:", json);
+
+			alert("Libro aggiunto: " + titolo + "\n\nIl file JSON verrà scaricato");
+			form.reset();
+
+			// Scarica automaticamente il JSON aggiornato
+			var dataStr = JSON.stringify(json, null, 2);
+			var dataBlob = new Blob([dataStr], {type: "application/json"});
+			var url = URL.createObjectURL(dataBlob);
+			var link = document.createElement("a");
+			link.href = url;
+			link.download = "biblioteca.json";
+			link.click();
+
+			// Reindirizza a visualizza_biblioteca.html
+			setTimeout(function() {
+				window.location.href = "visualizza_biblioteca.html";
+			}, 2000);
+
+			return false;
+		}
+
+		// Pulsante per scaricare il JSON
+		document.getElementById("downloadBtn").addEventListener("click", function() {
+			var stringa_salvata = localStorage.getItem("biblioteca");
+			if (!stringa_salvata) {
+				alert("La biblioteca è vuota!");
+				return;
+			}
+			var json = JSON.parse(stringa_salvata);
+			var dataStr = JSON.stringify(json, null, 2);
+			var dataBlob = new Blob([dataStr], {type: "application/json"});
+			var url = URL.createObjectURL(dataBlob);
+			var link = document.createElement("a");
+			link.href = url;
+			link.download = "biblioteca.json";
+			link.click();
+		});
+	</script>
+</html>

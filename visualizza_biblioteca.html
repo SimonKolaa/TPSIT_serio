@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Visualizza Biblioteca</title>
+		<style>
+			table {
+				border-collapse: collapse;
+			}
+			th, td {
+				border: 1px solid black;
+				padding: 8px;
+			}
+			button {
+				padding: 5px 10px;
+				background-color: red;
+				color: white;
+				border: none;
+				cursor: pointer;
+			}
+			button:hover {
+				background-color: darkred;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>La Mia Biblioteca</h1>
+
+		<a href="inserisci_libro.html">Torna a Inserisci Libro</a>
+
+		<div id="contenuto"></div>
+	</body>
+
+	<script>
+		// Leggo il JSON salvato in locale
+		var stringa_salvata = localStorage.getItem("biblioteca");
+
+		if (stringa_salvata) {
+			var json = JSON.parse(stringa_salvata);
+			var libri = json.books;
+
+			if (libri && libri.length > 0) {
+				// Creo la tabella
+				var html = "<table>";
+				html += "<tr><th>Titolo</th><th>Autore</th><th>Casa Editrice</th><th>Genere</th><th>Azione</th></tr>";
+
+				for (var i = 0; i < libri.length; i++) {
+					html += "<tr>";
+					html += "<td>" + libri[i].libro + "</td>";
+					html += "<td>" + libri[i].autore + "</td>";
+					html += "<td>" + libri[i].casa_editrice + "</td>";
+					html += "<td>" + libri[i].genere + "</td>";
+					html += "<td><button onclick=\"rimuoviLibro(" + i + ")\">Rimuovi</button></td>";
+					html += "</tr>";
+				}
+
+				html += "</table>";
+				document.getElementById("contenuto").innerHTML = html;
+			} else {
+				document.getElementById("contenuto").innerHTML = "<p>La biblioteca è vuota.</p>";
+			}
+		} else {
+			document.getElementById("contenuto").innerHTML = "<p>La biblioteca è vuota.</p>";
+		}
+
+		// Funzione per rimuovere un libro
+		function rimuoviLibro(index) {
+			if (confirm("Sei sicuro di voler rimuovere questo libro?")) {
+				var stringa_salvata = localStorage.getItem("biblioteca");
+				var json = JSON.parse(stringa_salvata);
+				
+				// Rimuovo il libro
+				json.books.splice(index, 1);
+				
+				// Salvo nel localStorage
+				localStorage.setItem("biblioteca", JSON.stringify(json, null, 2));
+				
+				alert("Libro rimosso!");
+				location.reload();
+			}
+		}
+	</script>
+</html>
