@@ -32,6 +32,8 @@
 		<a href="visualizza_biblioteca.html">Visualizza Biblioteca</a>
 		<br><br>
 		<button id="downloadBtn">Scarica biblioteca.json</button>
+		<input type="file" id="uploadInput" accept=".json" style="display:none;">
+		<button id="uploadBtn">Carica biblioteca.json</button>
 
 	<script>
 		// Carica il file JSON iniziale se esiste
@@ -130,6 +132,29 @@
 			link.href = url;
 			link.download = "biblioteca.json";
 			link.click();
+		});
+
+		// Pulsante per caricare il JSON
+		document.getElementById("uploadBtn").addEventListener("click", function() {
+			document.getElementById("uploadInput").click();
+		});
+
+		document.getElementById("uploadInput").addEventListener("change", function(e) {
+			var file = e.target.files[0];
+			if (!file) return;
+
+			var reader = new FileReader();
+			reader.onload = function(event) {
+				try {
+					var json = JSON.parse(event.target.result);
+					localStorage.setItem("biblioteca", JSON.stringify(json, null, 2));
+					alert("Biblioteca caricata! Contiene " + json.books.length + " libri");
+					window.location.href = "visualizza_biblioteca.html";
+				} catch (err) {
+					alert("Errore: file JSON non valido!");
+				}
+			};
+			reader.readAsText(file);
 		});
 	</script>
 </html>
