@@ -1,0 +1,102 @@
+{
+    "competizioni" : [
+        {
+            "nome" : "Campionato Regionale 2026",
+            "data_inizio" : "2026-03-01",
+            "data_fine" : "2026-03-10",
+            "impianto" : "Stadio Comunale",
+            "quota_iscrizione" : 50.00,
+            "gare" : [
+                {
+                    "titolo" : "100m piani",
+                    "disciplina" : "corsa",
+                    "data_ora_inizio" : "2026-03-01T09:00",
+                    "durata" : "01:30",
+                    "categoria" : "senior",
+                    "regolamento" : "Gara su pista di 100 metri in linea retta",
+                    "partecipanti" : [
+                        {
+                            "nome" : "Marco",
+                            "cognome" : "Bianchi",
+                            "data_nascita" : "1998-05-12",
+                            "nazionalita" : "italiana",
+                            "disciplina" : "corsa"
+                        }
+                    ],
+                    "risultati" : [
+                        {
+                            "posizione" : 1,
+                            "punteggio" : 9.85
+                        }
+                    ]
+                },
+                {
+                    "titolo" : "Torneo Calcio",
+                    "disciplina" : "sport di squadra",
+                    "data_ora_inizio" : "2026-03-02T15:00",
+                    "durata" : "02:00",
+                    "categoria" : "juniores",
+                    "regolamento" : "Partita a eliminazione diretta",
+                    "partecipanti" : [
+                        {
+                            "nome_squadra" : "Aquile Blu",
+                            "anno_fondazione" : 2005,
+                            "giocatori" : [
+                                {
+                                    "nome" : "Luca",
+                                    "cognome" : "Rossi",
+                                    "data_nascita" : "2000-03-22",
+                                    "ruolo" : "portiere"
+                                },
+                                {
+                                    "nome" : "Giorgio",
+                                    "cognome" : "Neri",
+                                    "data_nascita" : "1999-11-05",
+                                    "ruolo" : "attaccante"
+                                }
+                            ]
+                        }
+                    ],
+                    "risultati" : [
+                        {
+                            "posizione" : 1,
+                            "punteggio" : 3
+                        },
+                        {
+                            "posizione" : 2,
+                            "punteggio" : 1
+                        }
+                    ]
+                }
+            ],
+            "servizi" : [
+                {
+                    "nome" : "Pronto Soccorso",
+                    "tipologia" : "assistenza medica",
+                    "posizione" : 3,
+                    "orari" : ["08:00", "13:00", "20:00"]
+                },
+                {
+                    "nome" : "Bar Atleti",
+                    "tipologia" : "ristoro",
+                    "posizione" : 7,
+                    "orari" : ["07:30", "19:00"]
+                }
+            ],
+        "giudici" : [
+                {
+                    "nome" : "Roberto",
+                    "cognome" : "Ferrari",
+                    "qualifica" : "arbitro internazionale",
+                    "anni_esperienza" : 15
+                },
+                {
+                    "nome" : "Anna",
+                    "cognome" : "Conti",
+                    "qualifica" : "giudice regionale",
+                    "anni_esperienza" : 8
+                }
+            ]
+        }
+    ]
+}
