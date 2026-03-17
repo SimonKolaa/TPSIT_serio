@@ -1,5 +1,5 @@
 #Import della classe Pattern dal modulo Kola_espreg
-from Kola_espreg import Pattern
+from esercizi.Kola_espreg import Pattern
 
 def main():
     #Creazione di un'istanza della classe con un'espressione regolare per numeri interi
