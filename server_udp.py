@@ -17,7 +17,7 @@ while attivo:
 
     # controllo termine esecuzione del server
     if ricevuto == "fine":
-        print("SERVER IN CHIUSURA. Buona serata.")
+        print("SERVER IN CHIUSURA")
         attivo = False
     else:
         # risposta: messaggio in maiuscolo

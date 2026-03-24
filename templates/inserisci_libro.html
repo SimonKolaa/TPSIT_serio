@@ -8,6 +8,8 @@
 				margin: 10px 0 20px 0;
 				width: 200px;
 				height: 30px;
+				border: 2px solid #ccc;
+				transition: border-color 0.2s ease;
 			}
 		</style>
 	</head>
@@ -49,6 +51,31 @@
 			xhr.send();
 		}
 		carica_biblioteca_iniziale();
+
+		// Aggiungi effetti di colorazione ai bordi degli elementi della form
+		document.querySelectorAll('input, select').forEach(function(element) {
+			// Colora di rosso scuro quando riceve il focus
+			element.addEventListener('focus', function() {
+				this.style.borderColor = 'darkred';
+			});
+
+			// Torna al colore di default quando perde il focus
+			element.addEventListener('blur', function() {
+				this.style.borderColor = '#ccc';
+			});
+
+			// Colora di rosso chiaro quando viene cliccato
+			element.addEventListener('mousedown', function() {
+				this.style.borderColor = '#FF9999';
+			});
+
+			// Ripristina rosso scuro quando ha il focus (dopo il click)
+			element.addEventListener('mouseup', function() {
+				if (document.activeElement === this) {
+					this.style.borderColor = 'darkred';
+				}
+			});
+		});
 
 		function salva_dati() {
 			console.log("Funzione salva_dati chiamata");
