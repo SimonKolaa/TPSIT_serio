@@ -53,7 +53,10 @@
 		carica_biblioteca_iniziale();
 
 		// Aggiungi effetti di colorazione ai bordi degli elementi della form
-		document.querySelectorAll('input, select').forEach(function(element) {
+		var elements = document.querySelectorAll('input, select');
+		for (var i = 0; i < elements.length; i++) {
+			var element = elements[i];
+			
 			// Colora di rosso scuro quando riceve il focus
 			element.addEventListener('focus', function() {
 				this.style.borderColor = 'darkred';
@@ -75,7 +78,7 @@
 					this.style.borderColor = 'darkred';
 				}
 			});
-		});
+		}
 
 		function salva_dati() {
 			console.log("Funzione salva_dati chiamata");
