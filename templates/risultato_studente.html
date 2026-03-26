@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Studenti Registrati</title>
+	<style>
+		body { font-family: Arial, sans-serif; margin: 30px; background: #f5f5f5; }
+		.json {
+			background: #1e1e1e; color: #d4d4d4; padding: 20px 25px; border-radius: 8px;
+			font: 15px/1.6 "Courier New", monospace; white-space: pre-wrap;
+			max-width: 700px; box-shadow: 0 2px 8px rgba(0,0,0,.15);
+		}
+		.k { color: #9cdcfe; } .s { color: #ce9178; } .n { color: #b5cea8; } .b { color: #569cd6; }
+		.ok { display: inline-block; background: #28a745; color: #fff; padding: 5px 14px; border-radius: 20px; font-size: 14px; margin-bottom: 16px; }
+		a {
+			display: inline-block; margin-top: 20px; padding: 10px 25px; background: #4a6fa5;
+			color: #fff; text-decoration: none; border-radius: 4px; font-size: 14px;
+		}
+		a:hover { background: #3a5a8a; }
+		.info { margin-top: 16px; color: #888; font-size: 13px; }
+	</style>
+</head>
+<body>
+	<h1>Studenti Registrati</h1>
+	<span class="ok">&#10003; Dati salvati in locale</span>
+	<h3>JSON degli studenti registrati:</h3>
+	<div id="out" class="json">Caricamento...</div>
+	<p class="info">I dati sono salvati nel localStorage del browser tramite JSON.stringify().</p>
+	<a href="registrazione_studente.html">&#8592; Registra un altro studente</a>
+<script>
+	var d = localStorage.getItem("studenti"), el = document.getElementById("out");
+	if (d) {
+		var j = JSON.stringify(JSON.parse(d), null, 2)
+			.replace(/("[\w_]+")\s*:/g, '<span class="k">$1</span>:')
+			.replace(/:\s*("(?:[^"\\]|\\.)*")/g, ': <span class="s">$1</span>')
+			.replace(/:\s*(\d+)/g, ': <span class="n">$1</span>')
+			.replace(/:\s*(true|false)/g, ': <span class="b">$1</span>');
+		el.innerHTML = j;
+	} else { el.textContent = "Nessun dato trovato. Registra prima uno studente."; }
+</script>
+</body>
+</html>
