@@ -1,0 +1,24 @@
+{
+  "studenti": [
+    {
+      "nome": "dario",
+      "cognome": "casali",
+      "data_nascita": "2005-02-10",
+      "classe": "2",
+      "sezione": "C",
+      "ripetente": true,
+      "anni_ripetuti": 1,
+      "uscita": "lavoro"
+    },
+    {
+      "nome": "sanchez",
+      "cognome": "alexander",
+      "data_nascita": "2005-05-10",
+      "classe": "3",
+      "sezione": "E",
+      "ripetente": true,
+      "anni_ripetuti": 1,
+      "uscita": "anno_sabbatico"
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registrazione Studente</title>
+	<style>
+		body { font-family: Arial, sans-serif; margin: 30px; background: #f5f5f5; }
+		label { display: block; margin-top: 12px; font-weight: bold; color: #444; }
+		input[type="text"], input[type="date"], select, input[type="number"] {
+			display: block; margin: 4px 0; width: 250px; height: 30px;
+			padding: 2px 8px; border: 2px solid #ccc; border-radius: 4px; font-size: 14px;
+		}
+		input[type="number"] { width: 80px; }
+		input[type="checkbox"] { margin-right: 6px; transform: scale(1.2); }
+		.ck { display: flex; align-items: center; margin-top: 4px; }
+		.ck label { margin: 0; font-weight: normal; }
+		input[type="submit"], button {
+			margin-top: 20px; padding: 10px 30px; background: #4a6fa5;
+			color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;
+		}
+		input[type="submit"]:hover, button:hover { background: #3a5a8a; }
+		.err { border-color: red !important; }
+		#errori { margin-top: 12px; color: red; font-size: 14px; }
+		#errori p { margin: 3px 0; }
+		.hide { display: none; }
+	</style>
+</head>
+<body>
+	<h1>Registrazione Studente</h1>
+	<form id="f" onsubmit="valida(); return false;">
+		<label>Nome</label>
+		<input id="nome" type="text" placeholder="Inserisci il nome"/>
+		<label>Cognome</label>
+		<input id="cognome" type="text" placeholder="Inserisci il cognome"/>
+		<label>Data di nascita</label>
+		<input id="data_nascita" type="date"/>
+		<label>Classe</label>
+		<select id="classe">
+			<option value="">-- Seleziona --</option>
+			<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+		</select>
+		<label>Sezione</label>
+		<select id="sezione">
+			<option value="">-- Seleziona --</option>
+			<option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option>
+		</select>
+		<label>Ripetente</label>
+		<div class="ck">
+			<input id="ripetente" type="checkbox" onchange="document.getElementById('boxAnni').className=this.checked?'':'hide'"/>
+			<label>Si, sono ripetente</label>
+		</div>
+		<div id="boxAnni" class="hide">
+			<label>Anni ripetuti</label>
+			<input id="anni_ripetuti" type="number" min="1" max="5" value="1"/>
+		</div>
+		<label>Uscita dopo il diploma</label>
+		<select id="uscita">
+			<option value="">-- Seleziona --</option>
+			<option value="universita">Università</option>
+			<option value="lavoro">Lavoro</option>
+			<option value="its">ITS</option>
+			<option value="anno_sabbatico">Anno sabbatico</option>
+			<option value="altro">Altro</option>
+		</select>
+		<input type="submit" value="INVIA"/>
+	</form>
+	<div id="errori"></div>
+
+	<br>
+	<a href="risultato_studente.html">Visualizza studenti registrati</a>
+	<br><br>
+	<button id="downloadBtn">Scarica studenti.json</button>
+	<input type="file" id="uploadInput" accept=".json" style="display:none;">
+	<button id="uploadBtn">Carica studenti.json</button>
+
+<script>
+	// Carica il file studenti.json iniziale se esiste
+	function carica_studenti_iniziale() {
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if (xhr.status === 200) {
+				localStorage.setItem("studenti", xhr.responseText);
+			}
+		};
+		xhr.open("GET", "studenti.json", true);
+		xhr.send();
+	}
+	carica_studenti_iniziale();
+
+	// Salva direttamente su studenti.json tramite il server
+	function salva_su_file(json) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "/salva_studenti", true);
+		xhr.setRequestHeader("Content-Type", "application/json");
+		xhr.send(JSON.stringify(json, null, 2));
+	}
+
+	function val(id) { var e = document.getElementById(id); return e.type === "checkbox" ? e.checked : e.value.trim(); }
+
+	function valida() {
+		var err = [], div = document.getElementById("errori"), i;
+		div.innerHTML = "";
+		var old = document.querySelectorAll(".err");
+		for (i = 0; i < old.length; i++) old[i].classList.remove("err");
+
+		var nome = val("nome"), cognome = val("cognome"), nascita = val("data_nascita");
+		var classe = val("classe"), sez = val("sezione");
+		var rip = val("ripetente"), anni = parseInt(val("anni_ripetuti")) || 0, usc = val("uscita");
+
+		if (!nome || nome.length < 2) err.push({c:"nome", m:"Il nome è obbligatorio (min 2 caratteri)"});
+		if (!cognome || cognome.length < 2) err.push({c:"cognome", m:"Il cognome è obbligatorio (min 2 caratteri)"});
+		if (!nascita) { err.push({c:"data_nascita", m:"La data di nascita è obbligatoria"}); }
+		else {
+			var eta = new Date().getFullYear() - new Date(nascita).getFullYear();
+			if (eta < 13 || eta > 25) err.push({c:"data_nascita", m:"Età deve essere tra 13 e 25 anni"});
+		}
+		if (!classe) err.push({c:"classe", m:"Selezionare una classe"});
+		if (!sez) err.push({c:"sezione", m:"Selezionare una sezione"});
+		if (rip && (anni < 1 || anni > 5)) err.push({c:"anni_ripetuti", m:"Anni ripetuti: tra 1 e 5"});
+		if (!usc) err.push({c:"uscita", m:"Selezionare un'opzione di uscita"});
+
+		if (err.length > 0) {
+			for (i = 0; i < err.length; i++) {
+				document.getElementById(err[i].c).classList.add("err");
+				var p = document.createElement("p");
+				p.textContent = err[i].c.replace(/_/g," ").toUpperCase() + ": " + err[i].m;
+				div.appendChild(p);
+			}
+			return;
+		}
+
+		// Creo l'oggetto studente
+		var studente = {
+			nome: nome, cognome: cognome, data_nascita: nascita,
+			classe: classe, sezione: sez,
+			ripetente: rip, anni_ripetuti: rip ? anni : 0, uscita: usc
+		};
+
+		// Leggo il JSON salvato in localStorage, se esiste
+		var salvati = localStorage.getItem("studenti");
+		var json = salvati ? JSON.parse(salvati) : {"studenti": []};
+
+		// Aggiungo lo studente all'array
+		json.studenti.push(studente);
+
+		// Salvo con JSON.stringify in localStorage
+		var stringa = JSON.stringify(json, null, 2);
+		localStorage.setItem("studenti", stringa);
+
+		// Salvo direttamente su file studenti.json
+		salva_su_file(json);
+
+		alert("Studente registrato: " + nome + " " + cognome);
+		document.getElementById("f").reset();
+		document.getElementById("boxAnni").className = "hide";
+
+		// Reindirizzo alla pagina risultato
+		window.location.href = "risultato_studente.html";
+	}
+
+	// Scarica il file studenti.json
+	document.getElementById("downloadBtn").addEventListener("click", function() {
+		var salvati = localStorage.getItem("studenti");
+		if (!salvati) { alert("Nessuno studente registrato!"); return; }
+		var blob = new Blob([salvati], {type: "application/json"});
+		var a = document.createElement("a");
+		a.href = URL.createObjectURL(blob);
+		a.download = "studenti.json";
+		a.click();
+	});
+
+	// Carica file studenti.json
+	document.getElementById("uploadBtn").addEventListener("click", function() {
+		document.getElementById("uploadInput").click();
+	});
+	document.getElementById("uploadInput").addEventListener("change", function(e) {
+		var file = e.target.files[0];
+		if (!file) return;
+		var reader = new FileReader();
+		reader.onload = function(ev) {
+			try {
+				var json = JSON.parse(ev.target.result);
+				localStorage.setItem("studenti", JSON.stringify(json, null, 2));
+				alert("Caricati " + json.studenti.length + " studenti!");
+				window.location.href = "risultato_studente.html";
+			} catch (err) { alert("Errore: file JSON non valido!"); }
+		};
+		reader.readAsText(file);
+	});
+</script>
+</body>
+</html>
