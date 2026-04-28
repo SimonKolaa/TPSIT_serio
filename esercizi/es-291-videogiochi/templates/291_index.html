@@ -2,131 +2,75 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Gestione Videogiochi</title>
+    <title>Ricerca Prodotto</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 28px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: bold;
-        }
-        
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-        
-        input[type="text"]:focus,
-        input[type="password"]:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-        }
-        
-        .error {
-            background-color: #fee;
-            color: #c33;
-            padding: 12px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #c33;
-        }
-        
-        .info {
-            background-color: #eef;
-            color: #33c;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-size: 12px;
-            text-align: center;
-        }
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 500px; margin: auto; }
+        #risultato { margin-top: 20px; }
     </style>
+    <script>
+        function cercaProdotto(event) {
+            if (event.preventDefault) {
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+
+            // Preso da controllo.png
+            var text = document.getElementById('codice_input').value;
+            
+            // Validazione con match ed espressione regolare
+            if(!text.match(/^[a-zA-Z][0-9]{3}$/)) {
+                alert("Codice non valido");
+            } else {
+                // AJAX
+                var xhr = new XMLHttpRequest();
+                
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        var divRisultato = document.getElementById('risultato');
+                        
+                        if (xhr.status === 200) {
+                            // PARSING in JSON
+                            var jsonDoc = JSON.parse(xhr.responseText);
+                            
+                            // Costruzione stringa HTML come da formato_risultato.png
+                            var htmlList = "<ul>";
+                            htmlList += "<li>";
+                            htmlList += "<ul>";
+                            htmlList += "<li>prezzo: " + jsonDoc.prezzo + "</li>";
+                            htmlList += "<li>marca: " + jsonDoc.marca + "</li>";
+                            htmlList += "<li>modello: " + jsonDoc.modello + "</li>";
+                            htmlList += "</ul>";
+                            htmlList += "</li>";
+                            htmlList += "<li></li>";
+                            htmlList += "<li></li>";
+                            htmlList += "</ul>";
+
+                            divRisultato.innerHTML = htmlList;
+                        } else {
+                            divRisultato.innerHTML = "<p style='color:red;'>Errore: Prodotto non trovato.</p>";
+                        }
+                    }
+                };
+
+                xhr.open("GET", "/api/prodotto?codice=" + text, true);
+                xhr.send();
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>🎮 Login</h1>
+        <h2>Ricerca Catalogo Informatica</h2>
         
-        {% if error %}
-        <div class="error">{{ error }}</div>
-        {% endif %}
-        
-        <form method="POST" action="/login">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            
-            <button type="submit">Accedi</button>
+        <form onsubmit="cercaProdotto(event)">
+            <label for="codice_input">Codice Prodotto:</label><br>
+            <input type="text" id="codice_input" placeholder="Es. A123" style="padding: 5px; margin-top: 5px;">
+            <button type="submit" style="padding: 5px 10px;">Cerca</button>
         </form>
-        
-        <div class="info">
-            <p><strong>Credenziali di test:</strong></p>
-            <p>Username: mario | Password: mario123</p>
-            <p>Username: luigi | Password: luigi123</p>
-        </div>
+
+        <div id="risultato"></div>
     </div>
 </body>
 </html>
