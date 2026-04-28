@@ -83,14 +83,13 @@
 		function salva_dati() {
 			console.log("Funzione salva_dati chiamata");
 			var form = document.getElementById("form1");
-			var data = new FormData(form);
 
-			var titolo = data.get("titolo_libro").trim();
-			var autore = data.get("autore_libro").trim();
-			var casa_editrice = data.get("casa_editrice_libro").trim();
-			var genere = data.get("genere");
+			var titolo = document.querySelector('input[name="titolo_libro"]').value.trim();
+			var autore = document.querySelector('input[name="autore_libro"]').value.trim();
+			var casa_editrice = document.querySelector('input[name="casa_editrice_libro"]').value.trim();
+			var genere = document.querySelector('select[name="genere"]').value;
 
-			console.log("Dati ricevuti:", {titolo, autore, casa_editrice, genere});
+			console.log("Dati ricevuti: titolo=" + titolo + ", autore=" + autore + ", casa_editrice=" + casa_editrice + ", genere=" + genere);
 
 			// Validazione
 			if (!titolo || !autore || !casa_editrice) {
@@ -140,9 +139,10 @@
 			link.click();
 
 			// Reindirizza a visualizza_biblioteca.html
-			setTimeout(function() {
+			var redirect = function() {
 				window.location.href = "visualizza_biblioteca.html";
-			}, 2000);
+			};
+			setTimeout(redirect, 2000);
 
 			return false;
 		}
