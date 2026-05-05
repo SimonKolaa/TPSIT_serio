@@ -46,28 +46,28 @@
     "modello": "focus",
     "alimentazione": "diesel",
     "colore": "nero",
-    "immagine": "ford_focus_nero.jpg"
+    "immagine": "https://cdn.autounica.com/f716340cae80e82f2106e62fa47d1808464fb94f0aac6d04e7e05b079fa4b69d_lg.jpg"
   },
   {
     "marca": "audi",
     "modello": "a1",
     "alimentazione": "benzina",
     "colore": "rosso",
-    "immagine": "audi_a1_rosso.jpg"
+    "immagine": "https://blog.fratelligiacomel.it/hubfs/header.png"
   },
   {
     "marca": "audi",
     "modello": "a1",
     "alimentazione": "diesel",
     "colore": "bianco",
-    "immagine": "audi_a1_bianco.jpg"
+    "immagine": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Audi_A1_1.6_TDI_Ambition_front_20100901.jpg"
   },
   {
     "marca": "audi",
     "modello": "a3",
     "alimentazione": "hybrid",
     "colore": "blu",
-    "immagine": "audi_a3_blu.jpg"
+    "immagine": "https://i2.res.24o.it/images2010/2020/03/AD2kTd/images/bf1f861a-5d46-11ea-87b3-96ab79e3a12c-fotohome0.jpg"
   },
   {
     "marca": "renault",
@@ -81,27 +81,27 @@
     "modello": "clio",
     "alimentazione": "diesel",
     "colore": "nero",
-    "immagine": "renault_clio_nero.jpg"
+    "immagine": "https://www.tecnoautosrl.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-15-at-15.45.12-5.jpeg"
   },
   {
     "marca": "volkswagen",
     "modello": "golf",
     "alimentazione": "benzina",
     "colore": "grigio",
-    "immagine": "volkswagen_golf_grigio.jpg"
+    "immagine": "https://www.biancoauto.it/wp-content/uploads/2026/01/IMG_8167-1080x675.jpg"
   },
   {
     "marca": "volkswagen",
     "modello": "golf",
     "alimentazione": "hybrid",
     "colore": "bianco",
-    "immagine": "volkswagen_golf_bianco.jpg"
+    "immagine": "https://statics.quattroruote.it/content/dam/quattroruote/it/foto/2019/12/05/volkswagen_golf_8_bianca_2019_/gallery/rsmall/2019-Volkswagen-Golf-8-bianca-98.jpg"
   },
   {
     "marca": "peugeot",
     "modello": "208",
     "alimentazione": "benzina",
     "colore": "rosso",
-    "immagine": "peugeot_208_rosso.jpg"
+    "immagine": "https://www.peugeotminieri.com/public/gallery/638381799247904315_peugeot-208-002.webp"
   }
 ]

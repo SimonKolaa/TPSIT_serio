@@ -420,7 +420,7 @@
                                    '<td>' + capitalizza(auto[i].modello) + '</td>' +
                                    '<td>' + capitalizza(auto[i].alimentazione) + '</td>' +
                                    '<td>' + capitalizza(auto[i].colore) + '</td>' +
-                                   '<td><div class="image-placeholder">' + auto[i].immagine + '</div></td>';
+                                   '<td><img src="' + auto[i].immagine + '" alt="' + auto[i].marca + ' ' + auto[i].modello + '" style="max-width: 100px; height: auto; border-radius: 5px;"></td>';
                     resultsBody.appendChild(row);
                 }
             }
