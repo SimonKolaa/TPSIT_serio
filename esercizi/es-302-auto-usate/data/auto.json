@@ -1,0 +1,107 @@
+[
+  {
+    "marca": "fiat",
+    "modello": "500",
+    "alimentazione": "benzina",
+    "colore": "rosso",
+    "immagine": "fiat_500_rosso.jpg"
+  },
+  {
+    "marca": "fiat",
+    "modello": "500",
+    "alimentazione": "diesel",
+    "colore": "nero",
+    "immagine": "fiat_500_nero.jpg"
+  },
+  {
+    "marca": "fiat",
+    "modello": "panda",
+    "alimentazione": "benzina",
+    "colore": "bianco",
+    "immagine": "fiat_panda_bianco.jpg"
+  },
+  {
+    "marca": "fiat",
+    "modello": "panda",
+    "alimentazione": "hybrid",
+    "colore": "grigio",
+    "immagine": "fiat_panda_grigio.jpg"
+  },
+  {
+    "marca": "ford",
+    "modello": "fiesta",
+    "alimentazione": "benzina",
+    "colore": "blu",
+    "immagine": "ford_fiesta_blu.jpg"
+  },
+  {
+    "marca": "ford",
+    "modello": "fiesta",
+    "alimentazione": "diesel",
+    "colore": "argento",
+    "immagine": "ford_fiesta_argento.jpg"
+  },
+  {
+    "marca": "ford",
+    "modello": "focus",
+    "alimentazione": "diesel",
+    "colore": "nero",
+    "immagine": "ford_focus_nero.jpg"
+  },
+  {
+    "marca": "audi",
+    "modello": "a1",
+    "alimentazione": "benzina",
+    "colore": "rosso",
+    "immagine": "audi_a1_rosso.jpg"
+  },
+  {
+    "marca": "audi",
+    "modello": "a1",
+    "alimentazione": "diesel",
+    "colore": "bianco",
+    "immagine": "audi_a1_bianco.jpg"
+  },
+  {
+    "marca": "audi",
+    "modello": "a3",
+    "alimentazione": "hybrid",
+    "colore": "blu",
+    "immagine": "audi_a3_blu.jpg"
+  },
+  {
+    "marca": "renault",
+    "modello": "clio",
+    "alimentazione": "benzina",
+    "colore": "giallo",
+    "immagine": "renault_clio_giallo.jpg"
+  },
+  {
+    "marca": "renault",
+    "modello": "clio",
+    "alimentazione": "diesel",
+    "colore": "nero",
+    "immagine": "renault_clio_nero.jpg"
+  },
+  {
+    "marca": "volkswagen",
+    "modello": "golf",
+    "alimentazione": "benzina",
+    "colore": "grigio",
+    "immagine": "volkswagen_golf_grigio.jpg"
+  },
+  {
+    "marca": "volkswagen",
+    "modello": "golf",
+    "alimentazione": "hybrid",
+    "colore": "bianco",
+    "immagine": "volkswagen_golf_bianco.jpg"
+  },
+  {
+    "marca": "peugeot",
+    "modello": "208",
+    "alimentazione": "benzina",
+    "colore": "rosso",
+    "immagine": "peugeot_208_rosso.jpg"
+  }
+]
