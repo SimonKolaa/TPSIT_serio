@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nome": "Wario",
+    "cognome": "Rossi",
+    "data_nascita": "2006-12-02",
+    "mansione": "Sviluppatore Backend"
+  },
+  {
+    "id": 2,
+    "nome": "Anna",
+    "cognome": "Bianchi",
+    "data_nascita": "1992-03-22",
+    "mansione": "Progettista Grafico"
+  },
+  {
+    "id": 3,
+    "nome": "Giovanni",
+    "cognome": "Verdi",
+    "data_nascita": "1988-11-08",
+    "mansione": "Project Manager"
+  },
+  {
+    "id": 4,
+    "nome": "mario",
+    "cognome": "rossi",
+    "data_nascita": "2006-12-02",
+    "mansione": "sviluppatore backend"
+  }
+]
